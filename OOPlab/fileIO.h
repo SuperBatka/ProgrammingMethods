@@ -3,6 +3,11 @@
 #include <string>
 #include <fstream>
 
+enum {
+	STRICT_TYPE = 0,
+	DYNAMIC_TYPE
+};
+
 class  progLanguage
 {
 public:
@@ -31,6 +36,16 @@ public:
 	void InData(std::ifstream &ifst);
 	void Out(std::ofstream &ofst);
 	oopLang() {}
+};
+
+class funcLang : public progLanguage
+{
+	int typization;
+	bool lazyEval;
+public:
+	void InData(std::ifstream &ifst);
+	void Out(std::ofstream &ofst);
+	funcLang () {}
 };
 
 
