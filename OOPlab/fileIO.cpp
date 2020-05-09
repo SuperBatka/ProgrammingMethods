@@ -77,15 +77,26 @@ bool progLanguage::Compare(progLanguage &compareTo)
 	return languageAge() < compareTo.languageAge();
 }
 
+void progLanguage::InData(std::ifstream &ifst)
+{
+	ifst >> _linksCount;
+}
+
+void progLanguage::Out(std::ofstream &ofst)
+{
+	ofst << "Количество упоминаний о данном языке в сети Интернет: " << _linksCount << std::endl;
+}
 
 void procLang::InData(std::ifstream &ifst)
 {
 	ifst >> isAbstract >> year;
+	progLanguage::InData(ifst);
 }
+
 void procLang::Out(std::ofstream &ofst)
 {
 	ofst << "It is procedure language: year is " << year << " and abstract is " << isAbstract << std::endl;
-
+	progLanguage::Out(ofst);
 }
 
 int procLang::languageAge()
@@ -96,11 +107,13 @@ int procLang::languageAge()
 void oopLang::InData(std::ifstream &ifst)
 {
 	ifst >> inherence >> year;
+	progLanguage::InData(ifst);
 }
 
 void oopLang::Out(std::ofstream &ofst)
 {
 	ofst << "It is a oop language, which was created in " << year << " with inherence " << inherence << std::endl;
+	progLanguage::Out(ofst);
 }
 
 

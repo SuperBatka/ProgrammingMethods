@@ -5,12 +5,12 @@
 
 class  progLanguage
 {
+	int _linksCount;
 public:
 	static progLanguage* In(std::ifstream &ifst);
-	virtual void InData(std::ifstream &ifst) = 0;
-	virtual void Out(std::ofstream &ofst) = 0;
+	virtual void InData(std::ifstream &ifst);
+	virtual void Out(std::ofstream &ofst);
 	virtual int languageAge() = 0;
-	
 	bool Compare(progLanguage &compareTo);
 protected:
 	progLanguage() {}
