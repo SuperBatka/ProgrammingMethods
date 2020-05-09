@@ -19,6 +19,26 @@ void container::Out(std::ofstream &ofst)
 	}
 }
 
+void container::OutProc(std::ofstream &ofst)
+{
+	ofst << "Only Procedure languages: " << std::endl;
+	for (int i = 0; i < len; i++)
+	{
+		//ofst << i << ": ";
+		cont[i]->OutProc(ofst);
+	}
+}
+
+void container::OutOOP(std::ofstream &ofst)
+{
+	ofst << "Only OOP languages: " << std::endl;
+	for (int i = 0; i < len; i++)
+	{
+		//ofst << i << ": ";
+		cont[i]->OutOOP(ofst);
+	}
+}
+
 void container::Clear()
 {
 	cont.clear();
@@ -45,6 +65,18 @@ progLanguage* progLanguage::In(std::ifstream &ifst)
 	return sp;
 }
 
+void progLanguage::OutProc(std::ofstream &ofst)
+{
+	if (false)
+		ofst << std::endl;
+}
+
+void progLanguage::OutOOP(std::ofstream &ofst)
+{
+	if(false)
+		ofst << std::endl;
+}
+
 
 void procLang::InData(std::ifstream &ifst)
 {
@@ -56,6 +88,12 @@ void procLang::Out(std::ofstream &ofst)
 
 }
 
+void procLang::OutProc(std::ofstream &ofst)
+{
+	Out(ofst);
+}
+
+
 void oopLang::InData(std::ifstream &ifst)
 {
 	ifst >> inherence >> year;
@@ -64,6 +102,11 @@ void oopLang::InData(std::ifstream &ifst)
 void oopLang::Out(std::ofstream &ofst)
 {
 	ofst << "It is a oop language, which was created in " << year << " with inherence " << inherence << std::endl;
+}
+
+void oopLang::OutOOP(std::ofstream &ofst)
+{
+	Out(ofst);
 }
 
 container::container() : len(0) {}

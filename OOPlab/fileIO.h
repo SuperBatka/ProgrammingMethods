@@ -9,6 +9,8 @@ public:
 	static progLanguage* In(std::ifstream &ifst);
 	virtual void InData(std::ifstream &ifst) = 0;
 	virtual void Out(std::ofstream &ofst) = 0;
+	virtual void OutProc(std::ofstream &ofst);
+	virtual void OutOOP(std::ofstream &ofst);
 protected:
 	progLanguage() {}
 };
@@ -20,6 +22,7 @@ class procLang : public progLanguage
 public:
 	void InData(std::ifstream &ifst);
 	void Out(std::ofstream &ofst);
+	void OutProc(std::ofstream &ofst);
 	procLang() {}
 };
 
@@ -30,6 +33,7 @@ class oopLang : public progLanguage
 public:
 	void InData(std::ifstream &ifst);
 	void Out(std::ofstream &ofst);
+	void OutOOP(std::ofstream &ofst);
 	oopLang() {}
 };
 
@@ -42,6 +46,8 @@ class container
 public:
 	void In(std::ifstream &ifst);
 	void Out(std::ofstream &ofst);
+	void OutProc(std::ofstream &ofst);
+	void OutOOP(std::ofstream &ofst);
 	void Clear();
 	container();
 	~container() { Clear(); }

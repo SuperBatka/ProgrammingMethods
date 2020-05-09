@@ -18,6 +18,7 @@ int main(int argc, char* argv[])
 	}
 	std::vector<progLanguage> abc;
 	ReadFromFile(fin,abc);
-	WriteToFile(fout,abc);
+	//WriteToFile(fout,abc);
+	filteredOut(fout,abc,PROCEDURE);
     return 0;
 }

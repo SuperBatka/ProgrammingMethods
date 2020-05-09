@@ -4,7 +4,7 @@
 #include <fstream>
 
 
-enum {
+enum  {
 	OOP = 0,
 	PROCEDURE
 };
@@ -26,3 +26,4 @@ struct progLanguage
 
 void ReadFromFile(std::ifstream &fin, std::vector<progLanguage> &container);
 void WriteToFile(std::ofstream &fout, std::vector<progLanguage> &container);
+void filteredOut(std::ofstream &fout,  std::vector<progLanguage> &container, int type);
