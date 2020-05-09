@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 	c.In(ifst);
 
 	ofst << "Filled container. " << std::endl;
-	c.Out(ofst);
+	c.OutWithAge(ofst);
 
 	c.Clear();
 	ofst << "Empty container." << std::endl;

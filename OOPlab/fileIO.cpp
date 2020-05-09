@@ -19,6 +19,17 @@ void container::Out(std::ofstream &ofst)
 	}
 }
 
+void container::OutWithAge(std::ofstream &ofst)
+{
+	ofst << "Container contents " << len << " elements. " << std::endl;
+	for (int i = 0; i < len; i++)
+	{
+		ofst << i << ": ";
+		cont[i]->Out(ofst);
+		ofst << "Возраст данного языка равен " << cont[i]->languageAge() << std::endl;
+	}
+}
+
 void container::Clear()
 {
 	cont.clear();
@@ -56,6 +67,11 @@ void procLang::Out(std::ofstream &ofst)
 
 }
 
+int procLang::languageAge()
+{
+	return 2020  - year;
+}
+
 void oopLang::InData(std::ifstream &ifst)
 {
 	ifst >> inherence >> year;
@@ -64,6 +80,12 @@ void oopLang::InData(std::ifstream &ifst)
 void oopLang::Out(std::ofstream &ofst)
 {
 	ofst << "It is a oop language, which was created in " << year << " with inherence " << inherence << std::endl;
+}
+
+
+int oopLang::languageAge()
+{
+	return 2020 - year;
 }
 
 container::container() : len(0) {}

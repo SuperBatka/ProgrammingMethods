@@ -41,6 +41,12 @@ void WriteToFile(std::ofstream &fout, std::vector<progLanguage> &container)
 			fout << " c поддержкой интерфейсов";
 		}
 
-		fout << " был разработан в " << container[i].year << " году\n";
+		fout << " был разработан в " << container[i].year << " году.";
+		fout << " На данный момент возраст этого языка равен " << languageAge(container[i]) << std::endl;
 	}
+}
+
+int languageAge(progLanguage &lang)
+{
+	return 2020 - lang.year;
 }
