@@ -8,9 +8,19 @@ void ReadFromFile(std::ifstream &fin, std::vector<progLanguage> &container)
 	for(int i = 0; i < a; i++)
 	{
 		fin >> container[i].type;
-		fin >> container[i].name;
-		fin >> container[i].inherence;
-		fin >> container[i].year;
+		if ( container[i].type == OOP)
+		{
+			fin >> container[i].name;
+			fin >> container[i].inherence;
+			fin >> container[i].year;	
+			fin >> container[i].linksCount;
+		} else 
+		{
+			fin >> container[i].name;
+			fin >> container[i].isAbstract;
+			fin >> container[i].year;
+			fin >> container[i].linksCount;	
+		}
 	}
 }
 
@@ -41,6 +51,7 @@ void WriteToFile(std::ofstream &fout, std::vector<progLanguage> &container)
 			fout << " c поддержкой интерфейсов";
 		}
 
-		fout << " был разработан в " << container[i].year << " году\n";
+		fout << " был разработан в " << container[i].year << " году.";
+		fout << " Количество упоминаний о данном языке в сети Интернет: " << container[i].linksCount <<std::endl;
 	}
 }

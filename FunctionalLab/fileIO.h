@@ -22,6 +22,7 @@ struct progLanguage
 	bool isAbstract;
 	int type;
 	int inherence;
+	int linksCount;
 };
 
 void ReadFromFile(std::ifstream &fin, std::vector<progLanguage> &container);
