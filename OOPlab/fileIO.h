@@ -3,6 +3,11 @@
 #include <string>
 #include <fstream>
 
+enum {
+	STRICT_TYPE = 0,
+	DYNAMIC_TYPE
+};
+
 class  progLanguage
 {
 	int _linksCount;
@@ -36,6 +41,18 @@ public:
 	void Out(std::ofstream &ofst);
 	int languageAge();
 	oopLang() {}
+};
+
+class funcLang : public progLanguage
+{
+	int year;
+	int typization;
+	bool lazyEval;
+public:
+	void InData(std::ifstream &ifst);
+	void Out(std::ofstream &ofst);
+	int languageAge();
+	funcLang () {}
 };
 
 

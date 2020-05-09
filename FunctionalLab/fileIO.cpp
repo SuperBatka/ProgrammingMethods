@@ -14,12 +14,20 @@ void ReadFromFile(std::ifstream &fin, std::vector<progLanguage> &container)
 			fin >> container[i].inherence;
 			fin >> container[i].year;	
 			fin >> container[i].linksCount;
-		} else 
+		} else if ( container[i].type == PROCEDURE)
 		{
 			fin >> container[i].name;
 			fin >> container[i].isAbstract;
 			fin >> container[i].year;
 			fin >> container[i].linksCount;	
+		} else
+		{
+			fin >> container[i].name;
+			fin >> container[i].lazyEval;
+			fin >> container[i].typization;
+			fin >> container[i].year;
+			fin >> container[i].linksCount;	
+
 		}
 	}
 }
@@ -33,23 +41,51 @@ void WriteToFile(std::ofstream &fout, std::vector<progLanguage> &container)
 		if(container[i].type == OOP )
 		{
 			fout << "Объектно ориентированный язык программирования ";
-		} else 
+			if(container[i].inherence == SINGLE)
+			{
+				fout << " с одиночным наследованием";
+			} else if(container[i].inherence == MULTIPLE)
+			{
+				fout << " c множественным наследованием";
+
+			} else if (container[i].inherence == INTERFACE)
+			{
+				fout << " c поддержкой интерфейсов";
+			}
+		} else if  (container[i].type == PROCEDURE)
 		{
 			fout << "Процедурный язык программирования ";
+			if(container[i].isAbstract == 0)
+			{
+				fout << " без абстрактных типов данных";
+			} else 
+			{
+				fout << " c наличием абстрактных типов данных";
+			} 
+			
+		} else 
+		{
+			fout << "Функциональный язык программирования ";
+			
+			if(container[i].lazyEval == 0)
+			{
+				fout << " без поддержки ленивый вычислений";
+			} else 
+			{
+				fout << " c поддержкой ленивый вычислений";
+			} 
+			
+			if(container[i].typization == STRICT_TYPE)
+			{
+				fout << " с строгой типизацией";
+			} else 
+			{
+				fout << " c динамической типизацией";
+			} 
 		}
 
-		fout << container[i].name; 
-		if(container[i].inherence == SINGLE)
-		{
-			fout << " с одиночным наследованием";
-		} else if(container[i].inherence == MULTIPLE)
-		{
-			fout << " c множественным наследованием";
+		fout << " \"" <<container[i].name << "\""; 
 
-		} else if (container[i].inherence == INTERFACE)
-		{
-			fout << " c поддержкой интерфейсов";
-		}
 
 		fout << " был разработан в " << container[i].year << " году.";
 

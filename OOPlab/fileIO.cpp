@@ -65,6 +65,9 @@ progLanguage* progLanguage::In(std::ifstream &ifst)
 	case 2:
 		sp = new oopLang;
 		break;
+	case 3:
+		sp = new funcLang;
+		break;
 	default:
 		return 0;
 	}
@@ -95,7 +98,7 @@ void procLang::InData(std::ifstream &ifst)
 
 void procLang::Out(std::ofstream &ofst)
 {
-	ofst << "It is procedure language: year is " << year << " and abstract is " << isAbstract << std::endl;
+	ofst << "Это процедурный язык программирования, который был создан в " << year << " году и наличие абстрактных классов - " << isAbstract << std::endl;
 	progLanguage::Out(ofst);
 }
 
@@ -112,12 +115,39 @@ void oopLang::InData(std::ifstream &ifst)
 
 void oopLang::Out(std::ofstream &ofst)
 {
-	ofst << "It is a oop language, which was created in " << year << " with inherence " << inherence << std::endl;
+	ofst << "Это объектно-ориентированный язык программирования, который был создан в " << year << " году c наследованием  - " << inherence << std::endl;
 	progLanguage::Out(ofst);
 }
 
 
 int oopLang::languageAge()
+{
+	return 2020 - year;	
+}
+
+
+void funcLang::Out(std::ofstream &ofst)
+{
+	ofst <<  "Это функциональный язык программирования ";
+	if(typization == STRICT_TYPE)
+		ofst << "со строгой типизацией ";
+	else 
+		ofst << "с динамической типизацией ";
+	if(lazyEval == 0)
+		ofst << "без поддержки ленивый вычислений";
+	else 
+		ofst <<"с поддержкой ленивый вычислений"<< std::endl;
+	ofst << ", который был создан в " << year << "году. "; 
+	progLanguage::Out(ofst);
+}
+
+void funcLang::InData(std::ifstream &ifst)
+{
+	ifst >> lazyEval >> typization >> year;
+	progLanguage::InData(ifst);
+}
+
+int funcLang::languageAge()
 {
 	return 2020 - year;
 }
