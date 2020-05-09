@@ -23,6 +23,7 @@ int main(int argc, char* argv[])
 	container c;
 
 	c.In(ifst);
+	c.Sort();
 
 	ofst << "Filled container. " << std::endl;
 	c.OutWithAge(ofst);

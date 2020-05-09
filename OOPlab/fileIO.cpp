@@ -30,6 +30,22 @@ void container::OutWithAge(std::ofstream &ofst)
 	}
 }
 
+void container::Sort()
+{
+	for ( int i = 0; i < len; i++)
+	{
+		for( int j = i + 1; j < len; j++)
+		{
+			if(cont[i]->Compare(*cont[j]))
+			{
+				progLanguage *tmp = cont[i];
+				cont[i] = cont[j];
+				cont[j] = tmp;
+			}
+		}
+	}
+}
+
 void container::Clear()
 {
 	cont.clear();
@@ -54,6 +70,11 @@ progLanguage* progLanguage::In(std::ifstream &ifst)
 	}
 	sp->InData(ifst);
 	return sp;
+}
+
+bool progLanguage::Compare(progLanguage &compareTo)
+{
+	return languageAge() < compareTo.languageAge();
 }
 
 

@@ -27,3 +27,5 @@ struct progLanguage
 void ReadFromFile(std::ifstream &fin, std::vector<progLanguage> &container);
 void WriteToFile(std::ofstream &fout, std::vector<progLanguage> &container);
 int languageAge(progLanguage &lang);
+bool Compare(progLanguage *first, progLanguage *second);
+void Sort(std::vector<progLanguage> &container);

@@ -18,6 +18,7 @@ int main(int argc, char* argv[])
 	}
 	std::vector<progLanguage> abc;
 	ReadFromFile(fin,abc);
+	Sort(abc);
 	WriteToFile(fout,abc);
     return 0;
 }

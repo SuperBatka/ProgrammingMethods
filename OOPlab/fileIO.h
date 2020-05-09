@@ -10,6 +10,8 @@ public:
 	virtual void InData(std::ifstream &ifst) = 0;
 	virtual void Out(std::ofstream &ofst) = 0;
 	virtual int languageAge() = 0;
+	
+	bool Compare(progLanguage &compareTo);
 protected:
 	progLanguage() {}
 };
@@ -47,6 +49,7 @@ public:
 	void Out(std::ofstream &ofst);
 	void OutWithAge(std::ofstream &ofst);
 	void Clear();
+	void Sort();
 	container();
 	~container() { Clear(); }
 };

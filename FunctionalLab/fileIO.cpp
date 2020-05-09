@@ -50,3 +50,24 @@ int languageAge(progLanguage &lang)
 {
 	return 2020 - lang.year;
 }
+
+bool Compare(progLanguage &first, progLanguage &second) 
+{
+	return languageAge(first) < languageAge(second);
+}
+
+void Sort(std::vector<progLanguage> &container) 
+{
+	for(unsigned int i = 0; i < container.size() -1; i++) 
+		{
+			for(unsigned int j = i + 1; j < container.size(); j++) 
+				{
+					if(Compare(container[i], container[j])) 
+						{
+							progLanguage tmp = container[i];
+							container[i] = container[j];
+							container[j] = tmp;
+						}
+				}
+		}
+}
