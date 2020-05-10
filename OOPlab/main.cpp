@@ -26,7 +26,12 @@ int main(int argc, char* argv[])
 	c.Sort();
 
 	ofst << "Filled container. " << std::endl;
+
 	c.OutWithAge(ofst);
+	//c.Out(ofst);
+	//c.OutOOP(ofst);
+	//c.OutProc(ofst);
+
 
 	c.Clear();
 	ofst << "Empty container." << std::endl;

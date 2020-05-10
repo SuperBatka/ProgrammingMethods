@@ -4,7 +4,7 @@
 #include <fstream>
 
 
-enum {
+enum  {
 	OOP = 0,
 	PROCEDURE,
 	FUNCTIONAL
@@ -38,3 +38,4 @@ void WriteToFile(std::ofstream &fout, std::vector<progLanguage> &container);
 int languageAge(progLanguage &lang);
 bool Compare(progLanguage *first, progLanguage *second);
 void Sort(std::vector<progLanguage> &container);
+void filteredOut(std::ofstream &fout,  std::vector<progLanguage> &container, int type);
