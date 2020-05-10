@@ -8,6 +8,19 @@ enum {
 	DYNAMIC_TYPE
 };
 
+enum  {
+	OOP = 0,
+	PROCEDURE,
+	FUNCTIONAL
+};
+
+enum{
+		SINGLE =0,
+		MULTIPLE,
+		INTERFACE
+	};
+
+
 class  progLanguage
 {
 	int _linksCount;

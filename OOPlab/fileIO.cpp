@@ -80,13 +80,14 @@ progLanguage* progLanguage::In(std::ifstream &ifst)
 	ifst >> k;
 	switch (k)
 	{
+
+	case 0:
+		sp = new oopLang;
+		break;
 	case 1:
 		sp = new procLang;
 		break;
 	case 2:
-		sp = new oopLang;
-		break;
-	case 3:
 		sp = new funcLang;
 		break;
 	default:
@@ -132,9 +133,18 @@ void procLang::InData(std::ifstream &ifst)
 
 void procLang::Out(std::ofstream &ofst)
 {
-	ofst << "Это процедурный язык программирования, который был создан в " << year << " году и наличие абстрактных классов - " << isAbstract << std::endl;
+	ofst << "Процедурный язык программирования ";
+	if(isAbstract == 0)
+	{
+		ofst << " без абстрактных типов данных";
+	} else 
+	{
+		ofst << " c наличием абстрактных типов данных";
+	}
+	ofst << " был разработан в " << year << " году.";
 	progLanguage::Out(ofst);
 }
+
 
 int procLang::languageAge()
 {
@@ -155,7 +165,20 @@ void oopLang::InData(std::ifstream &ifst)
 
 void oopLang::Out(std::ofstream &ofst)
 {
-	ofst << "Это объектно-ориентированный язык программирования, который был создан в " << year << " году c наследованием  - " << inherence << std::endl;
+	ofst << "Объектно ориентированный язык программирования ";
+	if(inherence == SINGLE)
+	{
+		ofst << " с одиночным наследованием";
+	} else if(inherence == MULTIPLE)
+	{
+		ofst << " c множественным наследованием";
+	
+	} else if (inherence == INTERFACE)
+	{
+		ofst << " c поддержкой интерфейсов";
+	}
+	
+	ofst << " был разработан в " << year << " году.";
 	progLanguage::Out(ofst);
 }
 
@@ -177,7 +200,7 @@ void funcLang::Out(std::ofstream &ofst)
 		ofst << "без поддержки ленивый вычислений";
 	else 
 		ofst <<"с поддержкой ленивый вычислений"<< std::endl;
-	ofst << ", который был создан в " << year << "году. "; 
+	ofst << ", который был создан в " << year << " году. "; 
 	progLanguage::Out(ofst);
 }
 
