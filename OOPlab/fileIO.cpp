@@ -125,6 +125,15 @@ void progLanguage::OutOOP(std::ofstream &ofst)
 		ofst << std::endl;
 }
 
+int progLanguage::getLinksCount()
+{
+	return _linksCount;
+}
+void progLanguage::setLinksCount(int s)
+{
+	_linksCount = s;
+}
+
 void procLang::InData(std::ifstream &ifst)
 {
 	ifst >> isAbstract >> year;
@@ -155,7 +164,23 @@ void procLang::OutProc(std::ofstream &ofst)
 {
 	Out(ofst);
 }
-
+bool procLang::getAbstract()
+{
+	return isAbstract;
+}
+void procLang::setAbstract(bool s)
+{
+	isAbstract = s;
+}
+	
+int procLang::getYear()
+{
+	return year;
+}
+void procLang::setYear(int s)
+{
+	year = s;
+}
 
 void oopLang::InData(std::ifstream &ifst)
 {
@@ -188,6 +213,24 @@ int oopLang::languageAge()
 	return 2020 - year;	
 }
 
+int oopLang::getInherence()
+{
+	return inherence;
+}
+void oopLang::setInherence(int s)
+{
+	inherence = s;
+}
+	
+int oopLang::getYear()
+{
+	return year;
+}
+void oopLang::setYear(int s)
+{
+	year = s;
+}
+
 
 void funcLang::Out(std::ofstream &ofst)
 {
@@ -213,6 +256,35 @@ void funcLang::InData(std::ifstream &ifst)
 int funcLang::languageAge()
 {
 	return 2020 - year;
+}
+
+int funcLang::getTypization()
+{
+	return typization;
+}
+void funcLang::setTypization(int s)
+{
+	typization  = s;
+}
+
+
+bool funcLang::getLazyEval()
+{
+	return lazyEval;
+}
+
+void funcLang::setLazyEval(bool s)
+{
+	lazyEval = s;
+}
+
+int funcLang::getYear()
+{
+	return year;
+}
+void funcLang::setYear(int s)
+{
+	year = s;
 }
 
 void oopLang::OutOOP(std::ofstream &ofst)

@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
@@ -33,6 +34,9 @@ public:
 	virtual void OutProc(std::ofstream &ofst);
 	virtual void OutOOP(std::ofstream &ofst);
 	
+	void setLinksCount(int s);
+	int getLinksCount();
+	
 	bool Compare(progLanguage &compareTo);
 
 protected:
@@ -44,6 +48,12 @@ class procLang : public progLanguage
 	bool isAbstract;
 	int year;
 public:
+	bool getAbstract();
+	void setAbstract(bool s);
+	
+	int getYear();
+	void setYear(int s);
+	
 	void InData(std::ifstream &ifst);
 	void Out(std::ofstream &ofst);
 	int languageAge();
@@ -56,6 +66,12 @@ class oopLang : public progLanguage
 	int year;
 	int inherence;
 public:
+	int getInherence();
+	void setInherence(int s);
+	
+	int getYear();
+	void setYear(int s);
+	
 	void InData(std::ifstream &ifst);
 	void Out(std::ofstream &ofst);
 	int languageAge();
@@ -69,6 +85,15 @@ class funcLang : public progLanguage
 	int typization;
 	bool lazyEval;
 public:
+	int getTypization();
+	void setTypization(int s);
+	
+	int getYear();
+	void setYear(int s);
+	
+	bool getLazyEval();
+	void setLazyEval(bool s);
+	
 	void InData(std::ifstream &ifst);
 	void Out(std::ofstream &ofst);
 	int languageAge();
