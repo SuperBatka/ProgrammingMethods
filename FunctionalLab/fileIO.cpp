@@ -163,7 +163,7 @@ void filteredOut(std::ofstream &fout, std::vector<progLanguage> &container, int 
 					fout << " без абстрактных типов данных";
 				} else 
 				{
-					fout << " c наличием абстрактных типов данных" << std::endl;
+					fout << " c наличием абстрактных типов данных";
 				} 
 				
 				fout << " \"" <<container[i].name << "\""; 

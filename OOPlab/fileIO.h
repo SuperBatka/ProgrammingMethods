@@ -114,6 +114,15 @@ public:
 	void OutOOP(std::ofstream &ofst);
 	void Clear();
 	void Sort();
+	
+	void setContainerItemAt(int i, progLanguage *item);
+	progLanguage* getContainerItemAt(int i);
+	void pushBackContainer( progLanguage *item);
+	
+	void setLength(int s);
+	int getLength();
+
+	
 	container();
 	~container() { Clear(); }
 };

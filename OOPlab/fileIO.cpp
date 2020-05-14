@@ -67,10 +67,35 @@ void container::OutOOP(std::ofstream &ofst)
 	}
 }
 
+void container::setLength(int s)
+{
+	len = s;
+}
+
+int container::getLength()
+{
+	return len;
+}
+
 void container::Clear()
 {
 	cont.clear();
 	len = 0;
+}
+
+void container::setContainerItemAt(int i, progLanguage *item)
+{
+	cont.at(i) = item;
+}
+
+progLanguage* container::getContainerItemAt(int i)
+{
+	return cont.at(i);
+}
+
+void container::pushBackContainer( progLanguage *item)
+{
+	cont.push_back(item);
 }
 
 progLanguage* progLanguage::In(std::ifstream &ifst)
