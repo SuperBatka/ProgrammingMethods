@@ -4,7 +4,6 @@
 #include <string>
 #include <fstream>
 
-
 enum  {
 	OOP = 0,
 	PROCEDURE,

@@ -2,6 +2,10 @@
 
 void container::In(std::ifstream &ifst)
 {
+	if ( !ifst.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка чтения файла" );
+	}
 	while (!ifst.eof())
 	{
 		cont.push_back(progLanguage::In(ifst));
@@ -11,6 +15,10 @@ void container::In(std::ifstream &ifst)
 
 void container::Out(std::ofstream &ofst)
 {
+	if ( !ofst.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка записи в файл" );
+	}
 	ofst << "Container contents " << len << " elements. " << std::endl;
 	for (int i = 0; i < len; i++)
 	{
@@ -21,6 +29,10 @@ void container::Out(std::ofstream &ofst)
 
 void container::OutWithAge(std::ofstream &ofst)
 {
+	if ( !ofst.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка записи в файл" );
+	}
 	ofst << "Container contents " << len << " elements. " << std::endl;
 	for (int i = 0; i < len; i++)
 	{
@@ -48,6 +60,10 @@ void container::Sort()
 
 void container::OutProc(std::ofstream &ofst)
 {
+	if ( !ofst.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка записи в файл" );
+	}
 	ofst << "Only Procedure languages: " << std::endl;
 	for (int i = 0; i < len; i++)
 	{
@@ -58,6 +74,10 @@ void container::OutProc(std::ofstream &ofst)
 
 void container::OutOOP(std::ofstream &ofst)
 {
+	if ( !ofst.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка записи в файл" );
+	}
 	ofst << "Only OOP languages: " << std::endl;
 	for (int i = 0; i < len; i++)
 	{
@@ -69,6 +89,10 @@ void container::OutOOP(std::ofstream &ofst)
 
 void container::setLength(int s)
 {
+	if ( s < 0 )
+	{
+		throw std::invalid_argument( "Размер контейнера не может быть отрицательным числом" );
+	}
 	len = s;
 }
 
@@ -85,11 +109,19 @@ void container::Clear()
 
 void container::setContainerItemAt(int i, progLanguage *item)
 {
+	if ( i < 0 )
+	{
+		throw std::invalid_argument( "номер элемента контейнере не может быть отрицательным числом" );
+	}
 	cont.at(i) = item;
 }
 
 progLanguage* container::getContainerItemAt(int i)
 {
+	if ( i < 0 )
+	{
+		throw std::invalid_argument( "номер элемента контейнере не может быть отрицательным числом" );
+	}
 	return cont.at(i);
 }
 
@@ -102,7 +134,16 @@ progLanguage* progLanguage::In(std::ifstream &ifst)
 {
 	progLanguage *sp;
 	int k = 0;
-	ifst >> k;
+	
+	std::string next_arg;
+	ifst >> next_arg;
+	k = std::stoi( next_arg);
+
+	if ( ( k < 0 ) || ( k > 2 ) )
+	{
+		throw std::invalid_argument( "Нет такого языка, первым параметром для языка должно быть значение 0, 1 или 2" );
+	}
+	
 	switch (k)
 	{
 
@@ -130,22 +171,41 @@ bool progLanguage::Compare(progLanguage &compareTo)
 
 void progLanguage::InData(std::ifstream &ifst)
 {
-	ifst >> _linksCount;
+	std::string next_arg;
+
+	ifst >> next_arg;
+	_linksCount = std::stoi( next_arg);
+	if ( _linksCount < 0 )
+	{
+		throw std::invalid_argument( "Количество упоминаний в интернете не может быть отрицательным" );
+	}
 }
 
 void progLanguage::Out(std::ofstream &ofst)
 {
+	if ( !ofst.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка записи в файл" );
+	}
 	ofst << "Количество упоминаний о данном языке в сети Интернет: " << _linksCount << std::endl;
 }
 
 void progLanguage::OutProc(std::ofstream &ofst)
 {
+	if ( !ofst.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка записи в файл" );
+	}
 	if (false)
 		ofst << std::endl;
 }
 
 void progLanguage::OutOOP(std::ofstream &ofst)
 {
+	if ( !ofst.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка записи в файл" );
+	}
 	if(false)
 		ofst << std::endl;
 }
@@ -156,17 +216,42 @@ int progLanguage::getLinksCount()
 }
 void progLanguage::setLinksCount(int s)
 {
+
+	if ( s < 0 )
+	{
+		throw std::invalid_argument( "Количество не может быть отрицательным" );
+	}
 	_linksCount = s;
 }
 
 void procLang::InData(std::ifstream &ifst)
 {
-	ifst >> isAbstract >> year;
+	std::string next_arg;
+	ifst >> next_arg;
+	int temp = std::stoi( next_arg);
+	if ( temp != 0 && temp != 1 )
+	{
+		throw std::invalid_argument( "Наличие или отсутствие абстрактных типов данных должен описываться булевой переменной" );
+	}
+	isAbstract = static_cast<bool>(temp);
+ 
+	ifst >> next_arg;
+	year = std::stoi( next_arg);	
+	if ( ( year < 0 ) || ( year > 2020 ) )
+	{
+		throw std::invalid_argument( "Неправильно введён год" );
+	}
+	
+	
 	progLanguage::InData(ifst);
 }
 
 void procLang::Out(std::ofstream &ofst)
 {
+	if ( !ofst.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка записи в файл" );
+	}
 	ofst << "Процедурный язык программирования ";
 	if(isAbstract == 0)
 	{
@@ -187,6 +272,10 @@ int procLang::languageAge()
 
 void procLang::OutProc(std::ofstream &ofst)
 {
+	if ( !ofst.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка записи в файл" );
+	}
 	Out(ofst);
 }
 bool procLang::getAbstract()
@@ -204,17 +293,38 @@ int procLang::getYear()
 }
 void procLang::setYear(int s)
 {
+	if ( ( s < 0 ) || ( s > 2020 ) )
+		{
+			throw std::invalid_argument( "Неправильно введён год" );
+		}
 	year = s;
 }
 
 void oopLang::InData(std::ifstream &ifst)
 {
-	ifst >> inherence >> year;
+	std::string next_arg;
+	ifst >> next_arg;
+	inherence = std::stoi(next_arg);
+	if ( ( inherence < 0 ) || ( inherence > 2 ) )
+	{
+		throw std::invalid_argument( "Несуществующий тип наследования" );
+	}
+	
+	ifst >> next_arg;
+	year = std::stoi( next_arg);	
+	if ( ( year < 0 ) || ( year > 2020 ) )
+	{
+		throw std::invalid_argument( "Неправильно введён год" );
+	}
 	progLanguage::InData(ifst);
 }
 
 void oopLang::Out(std::ofstream &ofst)
 {
+	if ( !ofst.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка записи в файл" );
+	}
 	ofst << "Объектно ориентированный язык программирования ";
 	if(inherence == SINGLE)
 	{
@@ -244,6 +354,10 @@ int oopLang::getInherence()
 }
 void oopLang::setInherence(int s)
 {
+	if ( ( s < 0 ) || ( s > 2 ) )
+	{
+		throw std::invalid_argument( "Несуществующий тип наследования" );
+	}
 	inherence = s;
 }
 	
@@ -251,14 +365,24 @@ int oopLang::getYear()
 {
 	return year;
 }
+
 void oopLang::setYear(int s)
 {
+	if ( ( s < 0 ) || ( s > 2020 ) )
+	{
+		throw std::invalid_argument( "Неправильно введён год" );
+	}
 	year = s;
 }
 
 
 void funcLang::Out(std::ofstream &ofst)
 {
+	if ( !ofst.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка записи в файл" );
+	}
+	
 	ofst <<  "Это функциональный язык программирования ";
 	if(typization == STRICT_TYPE)
 		ofst << "со строгой типизацией ";
@@ -274,7 +398,30 @@ void funcLang::Out(std::ofstream &ofst)
 
 void funcLang::InData(std::ifstream &ifst)
 {
-	ifst >> lazyEval >> typization >> year;
+	std::string next_arg;
+	ifst >> next_arg;
+	int temp = std::stoi( next_arg);
+	if ( temp != 0 && temp != 1 )
+	{
+		throw std::invalid_argument( "Наличие или отсутствие поддержки ленивых вычислений должно описываться булевой переменной" );
+	}
+	lazyEval = static_cast<bool>(temp);
+	
+	ifst >> next_arg;
+	typization = std::stoi( next_arg);
+	if ( typization != 0 && typization != 1 )
+	{
+		throw std::invalid_argument( "Несуществующий вид типизации, 0 - строгая , 1 - динамическая" );
+	}
+	
+	ifst >> next_arg;
+	year = std::stoi( next_arg);	
+	if ( ( year < 0 ) || ( year > 2020 ) )
+	{
+		throw std::invalid_argument( "Неправильно введён год" );
+	}
+	
+	
 	progLanguage::InData(ifst);
 }
 
@@ -289,6 +436,10 @@ int funcLang::getTypization()
 }
 void funcLang::setTypization(int s)
 {
+	if ( s != 0 && s != 1 )
+	{
+		throw std::invalid_argument( "Несуществующий вид типизации, 0 - строгая , 1 - динамическая" );
+	}
 	typization  = s;
 }
 
@@ -300,6 +451,10 @@ bool funcLang::getLazyEval()
 
 void funcLang::setLazyEval(bool s)
 {
+	if ( s != 0 && s != 1 )
+	{
+		throw std::invalid_argument( "Наличие или отсутствие поддержки ленивых вычислений должно описываться булевой переменной" );
+	}
 	lazyEval = s;
 }
 
@@ -307,13 +462,22 @@ int funcLang::getYear()
 {
 	return year;
 }
+
 void funcLang::setYear(int s)
 {
+	if ( ( s < 0 ) || ( s > 2020 ) )
+	{
+		throw std::invalid_argument( "Неправильно введён год" );
+	}
 	year = s;
 }
 
 void oopLang::OutOOP(std::ofstream &ofst)
 {
+	if ( !ofst.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка записи в файл" );
+	}
 	Out(ofst);
 }
 

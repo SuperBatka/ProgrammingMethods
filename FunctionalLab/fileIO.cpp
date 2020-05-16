@@ -2,31 +2,118 @@
 
 void ReadFromFile(std::ifstream &fin, std::vector<progLanguage> &container)
 {
+	if ( !fin.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка чтения файла" );
+	}
+	
+	std::string b;
+	fin>>b;
 	int a = 0;
-	fin>>a;
+	a = std::stoi(b);
+	if (a < 1) 
+		throw std::invalid_argument("Количество должно быть целым положительным числом");
+
 	container.resize(a);
 	for(int i = 0; i < a; i++)
 	{
-		fin >> container[i].type;
+		std::string next_arg;
+		fin >> next_arg;
+		container[i].type = std::stoi( next_arg);
+
+		if ( ( container[i].type < 0 ) || ( container[i].type > 2 ) )
+		{
+			throw std::invalid_argument( "Нет такого языка, первым параметром для языка должно быть значение 0, 1 или 2" );
+		}
+		
 		if ( container[i].type == OOP)
 		{
-			fin >> container[i].name;
-			fin >> container[i].inherence;
-			fin >> container[i].year;	
-			fin >> container[i].linksCount;
+			
+			fin >> next_arg;
+			container[i].name = next_arg;
+			
+			fin >> next_arg;
+			container[i].inherence = std::stoi(next_arg);
+			if ( ( container[i].inherence < 0 ) || ( container[i].inherence > 2 ) )
+			{
+				throw std::invalid_argument( "Несуществующий тип наследования" );
+			}
+			
+			fin >> next_arg;
+			container[i].year = std::stoi( next_arg);	
+			if ( ( container[i].year < 0 ) || ( container[i].year > 2020 ) )
+			{
+				throw std::invalid_argument( "Неправильно введён год" );
+			}
+			
+			fin >> next_arg;
+			container[i].linksCount = std::stoi( next_arg);
+			if ( container[i].linksCount < 0 )
+			{
+				throw std::invalid_argument( "Количество не может быть отрицательным" );
+			}
+			
 		} else if ( container[i].type == PROCEDURE)
 		{
-			fin >> container[i].name;
-			fin >> container[i].isAbstract;
-			fin >> container[i].year;
-			fin >> container[i].linksCount;	
+			fin >> next_arg;
+			container[i].name = next_arg;
+			
+			fin >> next_arg;
+			int temp = std::stoi( next_arg);
+			if ( temp != 0 && temp != 1 )
+			{
+				throw std::invalid_argument( "Наличие или отсутствие абстрактных типов данных должен описываться булевой переменной" );
+			}
+			container[i].isAbstract = static_cast<bool>(temp);
+ 
+			fin >> next_arg;
+			container[i].year = std::stoi( next_arg);	
+			if ( ( container[i].year < 0 ) || ( container[i].year > 2020 ) )
+			{
+				throw std::invalid_argument( "Неправильно введён год" );
+			}
+			
+			fin >> next_arg;
+			container[i].linksCount = std::stoi( next_arg);
+			if ( container[i].linksCount < 0 )
+			{
+				throw std::invalid_argument( "Количество упоминаний в интернете не может быть отрицательным" );
+			}
+			
 		} else
 		{
-			fin >> container[i].name;
-			fin >> container[i].lazyEval;
-			fin >> container[i].typization;
-			fin >> container[i].year;
-			fin >> container[i].linksCount;	
+			fin >> next_arg;
+			container[i].name = next_arg;
+			
+
+			fin >> next_arg;
+			int temp = std::stoi( next_arg);
+			if ( temp != 0 && temp != 1 )
+			{
+				throw std::invalid_argument( "Наличие или отсутствие поддержки ленивых вычислений должно описываться булевой переменной" );
+			}
+			container[i].lazyEval = static_cast<bool>(temp);
+			
+			fin >> next_arg;
+			container[i].typization = std::stoi( next_arg);
+			if ( container[i].typization != 0 && container[i].typization != 1 )
+			{
+				throw std::invalid_argument( "Несуществующий вид типизации, 0 - строгая , 1 - динамическая" );
+			}
+			
+			fin >> next_arg;
+			container[i].year = std::stoi( next_arg);	
+			if ( ( container[i].year < 0 ) || ( container[i].year > 2020 ) )
+			{
+				throw std::invalid_argument( "Неправильно введён год" );
+			}
+			
+			fin >> next_arg;
+			container[i].linksCount = std::stoi( next_arg);
+			if ( container[i].linksCount < 0 )
+			{
+				throw std::invalid_argument( "Количество не может быть отрицательным" );
+			}
 
 		}
 	}
@@ -34,6 +121,10 @@ void ReadFromFile(std::ifstream &fin, std::vector<progLanguage> &container)
 
 void WriteToFile(std::ofstream &fout, std::vector<progLanguage> &container)
 {
+	if ( !fout.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка записи в файл" );
+	}
 	for(unsigned int i = 0; i < container.size(); i++)
 	{	
 		if(container[i].type == OOP )
@@ -127,6 +218,10 @@ void Sort(std::vector<progLanguage> &container)
 
 void filteredOut(std::ofstream &fout, std::vector<progLanguage> &container, int type)
 {
+	if ( !fout.is_open() )
+	{
+		throw std::invalid_argument( "Ошибка записи в файл" );
+	}
 	if ( type == OOP)
 	{
 		for(unsigned int i = 0; i < container.size(); i++)

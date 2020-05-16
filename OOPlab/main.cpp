@@ -21,22 +21,40 @@ int main(int argc, char* argv[])
 	std::cout << "Start" << std::endl;
 
 	container c;
+	try
+	{
+		c.In(ifst);
+		c.Sort();
 
-	c.In(ifst);
-	c.Sort();
+		ofst << "Filled container. " << std::endl;
 
-	ofst << "Filled container. " << std::endl;
-
-	c.OutWithAge(ofst);
-	//c.Out(ofst);
-	//c.OutOOP(ofst);
-	//c.OutProc(ofst);
+		c.OutWithAge(ofst);
+		//c.Out(ofst);
+		//c.OutOOP(ofst);
+		//c.OutProc(ofst);
 
 
-	c.Clear();
-	ofst << "Empty container." << std::endl;
-	c.Out(ofst);
+		c.Clear();
+		ofst << "Empty container." << std::endl;
+		c.Out(ofst);
 
-	std::cout << "Stop" << std::endl;
+		std::cout << "Stop" << std::endl;
+	}
+		catch ( std::invalid_argument &c )
+	{	
+		std::cerr << c.what()<< " или неправильное количество аргументов, или их порядок";
+		return 2;
+	}
+	catch (std::out_of_range const &e)
+	{
+		 std::cerr << e.what();
+		 return 4;
+		
+	}
+	catch ( ... )
+	{
+		std::cerr << "Провал";
+		return 3;
+	}
 	return 0;
 }
