@@ -45,6 +45,21 @@ progLanguage* progLanguage::In(std::ifstream &ifst)
 	return sp;
 }
 
+void progLanguage::MultiMethod(std::ofstream &ofst, progLanguage* other)
+{
+	ofst << "Неизвестный язык программирования" << std::endl;
+}
+
+void progLanguage::MMoop( std::ofstream &ofst)
+{
+	ofst << "Неизвестный язык программирования" << std::endl;
+}
+
+void progLanguage::MMprocedure( std::ofstream &ofst )
+{
+	ofst << "Неизвестный язык программирования" << std::endl;
+}
+
 
 void procLang::InData(std::ifstream &ifst)
 {
@@ -56,6 +71,21 @@ void procLang::Out(std::ofstream &ofst)
 
 }
 
+void oopLang::MultiMethod( std::ofstream &ofst, progLanguage *other )
+{
+	other->MMoop( ofst );
+}
+
+void oopLang::MMoop( std::ofstream &ofst )
+{
+	ofst << "ООП язык и ООП язык" << std::endl;
+}
+
+void oopLang::MMprocedure( std::ofstream &ofst )
+{
+	ofst << "Процедурный языки и ООП язык" << std::endl;
+}
+
 void oopLang::InData(std::ifstream &ifst)
 {
 	ifst >> inherence >> year;
@@ -64,6 +94,36 @@ void oopLang::InData(std::ifstream &ifst)
 void oopLang::Out(std::ofstream &ofst)
 {
 	ofst << "It is a oop language, which was created in " << year << " with inherence " << inherence << std::endl;
+}
+
+void procLang::MultiMethod( std::ofstream &ofst, progLanguage *other )
+{
+	other->MMprocedure( ofst );
+}
+
+void procLang::MMoop( std::ofstream &ofst )
+{
+	ofst << "ООП язык и Процедурный язык" << std::endl;
+}
+
+void procLang::MMprocedure( std::ofstream &ofst )
+{
+	ofst << "Процедурный язык и Процедурный язык" << std::endl;
+}
+
+
+void container::MultiMethod( std::ofstream &ofst )
+{
+	ofst << "Multimethod result" << std::endl;
+
+
+	for ( int i = 0; i < cont.size() - 1; i++ )
+	{
+		for ( int j = i + 1; j < cont.size(); j++ )
+		{
+			cont[ i ]->MultiMethod(ofst , cont[ j ]);
+		}
+	}
 }
 
 container::container() : len(0) {}

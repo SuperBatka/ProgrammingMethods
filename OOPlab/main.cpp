@@ -26,10 +26,11 @@ int main(int argc, char* argv[])
 
 	ofst << "Filled container. " << std::endl;
 	c.Out(ofst);
-
+    c.MultiMethod(ofst);
 	c.Clear();
 	ofst << "Empty container." << std::endl;
 	c.Out(ofst);
+
 
 	std::cout << "Stop" << std::endl;
 	return 0;

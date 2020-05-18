@@ -9,6 +9,10 @@ public:
 	static progLanguage* In(std::ifstream &ifst);
 	virtual void InData(std::ifstream &ifst) = 0;
 	virtual void Out(std::ofstream &ofst) = 0;
+    virtual void MultiMethod( std::ofstream& ofst, progLanguage* other ) = 0;
+
+	virtual void MMoop( std::ofstream& ofst ) = 0;
+	virtual void MMprocedure( std::ofstream& ofst ) = 0;
 protected:
 	progLanguage() {}
 };
@@ -20,6 +24,10 @@ class procLang : public progLanguage
 public:
 	void InData(std::ifstream &ifst);
 	void Out(std::ofstream &ofst);
+    virtual void MultiMethod( std::ofstream& ofst, progLanguage* other );
+
+	virtual void MMoop( std::ofstream& ofst );
+	virtual void MMprocedure( std::ofstream& ofst );
 	procLang() {}
 };
 
@@ -30,6 +38,10 @@ class oopLang : public progLanguage
 public:
 	void InData(std::ifstream &ifst);
 	void Out(std::ofstream &ofst);
+        virtual void MultiMethod( std::ofstream& ofst, progLanguage* other );
+
+	virtual void MMoop( std::ofstream& ofst );
+	virtual void MMprocedure( std::ofstream& ofst );
 	oopLang() {}
 };
 
@@ -42,6 +54,7 @@ class container
 public:
 	void In(std::ifstream &ifst);
 	void Out(std::ofstream &ofst);
+    void MultiMethod( std::ofstream &ofst );
 	void Clear();
 	container();
 	~container() { Clear(); }
