@@ -221,6 +221,19 @@ void progLanguage::setLinksCount( int s )
     _linksCount = s;
 }
 
+int progLanguage::getYear()
+{
+    return year;
+}
+void progLanguage::setYear( int s )
+{
+    if( ( s < 0 ) || ( s > 2020 ) )
+        {
+            throw std::invalid_argument( "Неправильно введён год" );
+        }
+    year = s;
+}
+
 void progLanguage::MultiMethod( std::ofstream &ofst, progLanguage *other )
 {
     ofst << "Неизвестный язык программирования" << std::endl;
@@ -254,11 +267,8 @@ void procLang::InData( std::ifstream &ifst )
     isAbstract = static_cast<bool>( temp );
 
     ifst >> next_arg;
-    year = std::stoi( next_arg );
-    if( ( year < 0 ) || ( year > 2020 ) )
-        {
-            throw std::invalid_argument( "Неправильно введён год" );
-        }
+    int year = std::stoi( next_arg );
+    setYear( year );
 
     progLanguage::InData( ifst );
 }
@@ -278,13 +288,13 @@ void procLang::Out( std::ofstream &ofst )
         {
             ofst << " c наличием абстрактных типов данных";
         }
-    ofst << " был разработан в " << year << " году.";
+    ofst << " был разработан в " << getYear() << " году.";
     progLanguage::Out( ofst );
 }
 
 int procLang::languageAge()
 {
-    return 2020 - year;
+    return 2020 - getYear();
 }
 
 void procLang::OutProc( std::ofstream &ofst )
@@ -304,18 +314,6 @@ void procLang::setAbstract( bool s )
     isAbstract = s;
 }
 
-int procLang::getYear()
-{
-    return year;
-}
-void procLang::setYear( int s )
-{
-    if( ( s < 0 ) || ( s > 2020 ) )
-        {
-            throw std::invalid_argument( "Неправильно введён год" );
-        }
-    year = s;
-}
 
 void oopLang::MultiMethod( std::ofstream &ofst, progLanguage *other )
 {
@@ -348,11 +346,8 @@ void oopLang::InData( std::ifstream &ifst )
         }
 
     ifst >> next_arg;
-    year = std::stoi( next_arg );
-    if( ( year < 0 ) || ( year > 2020 ) )
-        {
-            throw std::invalid_argument( "Неправильно введён год" );
-        }
+    int year = std::stoi( next_arg );
+    setYear( year );
     progLanguage::InData( ifst );
 }
 
@@ -376,13 +371,13 @@ void oopLang::Out( std::ofstream &ofst )
             ofst << " c поддержкой интерфейсов";
         }
 
-    ofst << " был разработан в " << year << " году.";
+    ofst << " был разработан в " << getYear() << " году.";
     progLanguage::Out( ofst );
 }
 
 int oopLang::languageAge()
 {
-    return 2020 - year;
+    return 2020 - getYear();
 }
 
 int oopLang::getInherence()
@@ -396,20 +391,6 @@ void oopLang::setInherence( int s )
             throw std::invalid_argument( "Несуществующий тип наследования" );
         }
     inherence = s;
-}
-
-int oopLang::getYear()
-{
-    return year;
-}
-
-void oopLang::setYear( int s )
-{
-    if( ( s < 0 ) || ( s > 2020 ) )
-        {
-            throw std::invalid_argument( "Неправильно введён год" );
-        }
-    year = s;
 }
 
 void procLang::MultiMethod( std::ofstream &ofst, progLanguage *other )
@@ -448,7 +429,7 @@ void funcLang::Out( std::ofstream &ofst )
         ofst << "без поддержки ленивый вычислений";
     else
         ofst << "с поддержкой ленивый вычислений" << std::endl;
-    ofst << ", который был создан в " << year << " году. ";
+    ofst << ", который был создан в " << getYear() << " году. ";
     progLanguage::Out( ofst );
 }
 
@@ -472,18 +453,15 @@ void funcLang::InData( std::ifstream &ifst )
         }
 
     ifst >> next_arg;
-    year = std::stoi( next_arg );
-    if( ( year < 0 ) || ( year > 2020 ) )
-        {
-            throw std::invalid_argument( "Неправильно введён год" );
-        }
+    int year = std::stoi( next_arg );
+    setYear( year );
 
     progLanguage::InData( ifst );
 }
 
 int funcLang::languageAge()
 {
-    return 2020 - year;
+    return 2020 - getYear();
 }
 
 int funcLang::getTypization()
@@ -512,20 +490,6 @@ void funcLang::setLazyEval( bool s )
                 "Наличие или отсутствие поддержки ленивых вычислений должно описываться булевой переменной" );
         }
     lazyEval = s;
-}
-
-int funcLang::getYear()
-{
-    return year;
-}
-
-void funcLang::setYear( int s )
-{
-    if( ( s < 0 ) || ( s > 2020 ) )
-        {
-            throw std::invalid_argument( "Неправильно введён год" );
-        }
-    year = s;
 }
 
 void funcLang::MultiMethod( std::ofstream &ofst, progLanguage *other )
