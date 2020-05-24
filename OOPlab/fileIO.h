@@ -27,6 +27,7 @@ enum
 class progLanguage
 {
     int _linksCount;
+    int year;
 
    public:
     static progLanguage* In( std::ifstream& ifst );
@@ -44,7 +45,9 @@ class progLanguage
 
     void setLinksCount( int s );
     int getLinksCount();
-
+    int getYear();
+    void setYear( int s );
+    
     bool Compare( progLanguage& compareTo );
 
    protected:
@@ -56,24 +59,19 @@ class progLanguage
 class procLang : public progLanguage
 {
     bool isAbstract;
-    int year;
-
    public:
     bool getAbstract();
     void setAbstract( bool s );
 
-    int getYear();
-    void setYear( int s );
+    void InData( std::ifstream& ifst ) override;
+    void Out( std::ofstream& ofst ) override;
+    int languageAge() override;
+    void OutProc( std::ofstream& ofst ) override;
 
-    void InData( std::ifstream& ifst );
-    void Out( std::ofstream& ofst );
-    int languageAge();
-    void OutProc( std::ofstream& ofst );
-
-    virtual void MultiMethod( std::ofstream& ofst, progLanguage* other );
-    virtual void MMoop( std::ofstream& ofst );
-    virtual void MMprocedure( std::ofstream& ofst );
-    virtual void MMfunctional( std::ofstream& ofst );
+    void MultiMethod( std::ofstream& ofst, progLanguage* other ) override;
+    void MMoop( std::ofstream& ofst ) override;
+    void MMprocedure( std::ofstream& ofst ) override;
+    void MMfunctional( std::ofstream& ofst ) override;
     procLang()
     {
     }
@@ -81,25 +79,21 @@ class procLang : public progLanguage
 
 class oopLang : public progLanguage
 {
-    int year;
     int inherence;
 
    public:
     int getInherence();
     void setInherence( int s );
 
-    int getYear();
-    void setYear( int s );
+    void InData( std::ifstream& ifst ) override;
+    void Out( std::ofstream& ofst ) override;
+    int languageAge() override;
+    void OutOOP( std::ofstream& ofst ) override;
 
-    void InData( std::ifstream& ifst );
-    void Out( std::ofstream& ofst );
-    int languageAge();
-    void OutOOP( std::ofstream& ofst );
-
-    virtual void MultiMethod( std::ofstream& ofst, progLanguage* other );
-    virtual void MMoop( std::ofstream& ofst );
-    virtual void MMprocedure( std::ofstream& ofst );
-    virtual void MMfunctional( std::ofstream& ofst );
+    void MultiMethod( std::ofstream& ofst, progLanguage* other ) override;
+    void MMoop( std::ofstream& ofst ) override;
+    void MMprocedure( std::ofstream& ofst ) override;
+    void MMfunctional( std::ofstream& ofst ) override;
     oopLang()
     {
     }
@@ -107,7 +101,6 @@ class oopLang : public progLanguage
 
 class funcLang : public progLanguage
 {
-    int year;
     int typization;
     bool lazyEval;
 
@@ -115,20 +108,17 @@ class funcLang : public progLanguage
     int getTypization();
     void setTypization( int s );
 
-    int getYear();
-    void setYear( int s );
-
     bool getLazyEval();
     void setLazyEval( bool s );
 
-    void InData( std::ifstream& ifst );
-    void Out( std::ofstream& ofst );
-    int languageAge();
+    void InData( std::ifstream& ifst ) override;
+    void Out( std::ofstream& ofst ) override;
+    int languageAge() override;
 
-    virtual void MultiMethod( std::ofstream& ofst, progLanguage* other );
-    virtual void MMoop( std::ofstream& ofst );
-    virtual void MMprocedure( std::ofstream& ofst );
-    virtual void MMfunctional( std::ofstream& ofst );
+    void MultiMethod( std::ofstream& ofst, progLanguage* other ) override;
+    void MMoop( std::ofstream& ofst ) override;
+    void MMprocedure( std::ofstream& ofst ) override;
+    void MMfunctional( std::ofstream& ofst ) override;
     funcLang()
     {
     }
